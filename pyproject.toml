@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clincot"
+version = "0.1.0"
+description = "ClinCoT: clinical visual chain-of-thought framework"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "ClinCoT Team"}]
+dependencies = []
+
+[project.scripts]
+clincot-train = "clincot.cli.train:main"
+clincot-infer = "clincot.cli.infer:main"
+clincot-eval = "clincot.evaluation.runner:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["clincot*"]

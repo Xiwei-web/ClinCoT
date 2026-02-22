@@ -1,0 +1,4 @@
+infer:
+  task: vqa
+  max_new_tokens: 64
+  do_sample: false

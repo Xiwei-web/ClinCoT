@@ -1,0 +1,30 @@
+seed: 42
+model:
+  vision:
+    model_name_or_path: openai/clip-vit-large-patch14-336
+    feature_pool: patch
+    freeze: false
+  language:
+    model_name_or_path: microsoft/llava-med-v1.5-mistral-7b
+    freeze: false
+    trust_remote_code: false
+  projector:
+    projector_type: linear
+    in_dim: 1024
+    out_dim: 4096
+    hidden_dim: 4096
+    dropout: 0.0
+data:
+  data_path: data/train_pref.jsonl
+  image_root: data/images
+  max_length: 1024
+train:
+  epochs: 1
+  batch_size: 1
+  num_workers: 4
+  lr: 1.0e-5
+  weight_decay: 0.0
+  beta: 0.1
+  use_sdpo_margin: false
+  log_every: 10
+  save_every: 200

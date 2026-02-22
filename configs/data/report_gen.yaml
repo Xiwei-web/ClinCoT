@@ -1,0 +1,4 @@
+data:
+  data_path: data/report_train.jsonl
+  image_root: data/images
+  max_length: 1536

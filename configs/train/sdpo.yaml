@@ -1,0 +1,10 @@
+train:
+  epochs: 1
+  batch_size: 1
+  num_workers: 4
+  lr: 1.0e-5
+  weight_decay: 0.0
+  beta: 0.1
+  use_sdpo_margin: true
+  log_every: 10
+  save_every: 200
