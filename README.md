@@ -36,3 +36,37 @@ pip install -r requirements.txt
 - [IU-Xray](https://drive.google.com/file/d/1c0BXEuDy8Cmm2jfN0YYGkQxFZd2ZIoLg/view)
 - [VQA-RAD](https://osf.io/89kps/)
 - [SLAKE](https://www.med-vqa.com/slake/)
+
+4. Data Format
+See `docs/data_format.md`.
+
+## 🏋️ Train
+Single GPU:
+```bash
+python clincot/cli/train.py --config configs/exp/clincot_base.yaml --mode sft --output_dir runs/sft
+```
+
+Multi GPU:
+```bash
+torchrun --nnodes=1 --nproc_per_node=4 clincot/cli/train.py --config configs/exp/clincot_base.yaml --mode pref --output_dir runs/pref
+```
+
+Resume:
+```bash
+torchrun --nnodes=1 --nproc_per_node=4 clincot/cli/train.py --config configs/exp/clincot_base.yaml --mode pref --output_dir runs/pref --resume
+```
+
+## 🏋️ Inference
+```bash
+python clincot/cli/infer.py \
+  --config configs/exp/clincot_base.yaml \
+  --checkpoint runs/pref/checkpoint-00001000 \
+  --image /path/to/image.png \
+  --question "What is the diagnosis?"
+```
+
+## 🏋️ Evaluation
+```bash
+python -m clincot.evaluation.runner --pred outputs/predictions.jsonl --task all
+```
+
