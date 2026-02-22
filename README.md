@@ -1,8 +1,14 @@
-# ClinCoT
+# ClinCoT: Clinical-Aware Visual Chain-of-Thought for Medical Vision Language Models
 
 ClinCoT is a modular research codebase for clinical multimodal reasoning with visual CoT and preference optimization.
 
-## 1. Project Structure
+## 💡 Overview
+
+<div align=left>
+<img src=assets/overview4.png width=90% />
+</div>
+
+## 📖  Project Structure
 - `clincot/models`: vision/language/projector/checkpoint core
 - `clincot/data`: datasets, preprocess, collators, pair builder
 - `clincot/methods`: DPO/sDPO loss, visual CoT, trainer core
@@ -13,49 +19,20 @@ ClinCoT is a modular research codebase for clinical multimodal reasoning with vi
 - `configs`: training/inference/model/data/experiment configs
 - `scripts`: runnable shell scripts
 
-## 2. Installation
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
+## 📦 Requirements
+1. Installation
+
+```Shell
+conda create -n clincot python=3.10 -y
+conda activate clincot
 pip install -r requirements.txt
-pip install -e .
 ```
 
-## 3. Data Format
-See `docs/data_format.md`.
+2. Download the required model checkpoints [LLaVA-Med-1.5](https://huggingface.co/microsoft/llava-med-v1.5-mistral-7b) from huggingface.
 
-## 4. Training
-Single GPU:
-```bash
-python clincot/cli/train.py --config configs/exp/clincot_base.yaml --mode sft --output_dir runs/sft
-```
 
-Multi GPU:
-```bash
-torchrun --nnodes=1 --nproc_per_node=4 clincot/cli/train.py --config configs/exp/clincot_base.yaml --mode pref --output_dir runs/pref
-```
+3. For all the medical datasets, you need firstly apply for the right of access and then download the dataset.
 
-Resume:
-```bash
-torchrun --nnodes=1 --nproc_per_node=4 clincot/cli/train.py --config configs/exp/clincot_base.yaml --mode pref --output_dir runs/pref --resume
-```
-
-## 5. Inference
-```bash
-python clincot/cli/infer.py \
-  --config configs/exp/clincot_base.yaml \
-  --checkpoint runs/pref/checkpoint-00001000 \
-  --image /path/to/image.png \
-  --question "What is the diagnosis?"
-```
-
-## 6. Evaluation
-```bash
-python -m clincot.evaluation.runner --pred outputs/predictions.jsonl --task all
-```
-
-## 7. Reproducibility
-- fixed seed in config
-- deterministic options in `clincot/utils/seed.py`
-- exact config snapshots under `configs/exp/`
-- checkpoint lifecycle in `docs/checkpoint_policy.md`
+- [IU-Xray](https://drive.google.com/file/d/1c0BXEuDy8Cmm2jfN0YYGkQxFZd2ZIoLg/view)
+- [VQA-RAD](https://osf.io/89kps/)
+- [SLAKE](https://www.med-vqa.com/slake/)
