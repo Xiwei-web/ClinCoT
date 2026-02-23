@@ -48,12 +48,12 @@ python clincot/cli/train.py --config configs/exp/clincot_base.yaml --mode sft --
 
 Multi GPU:
 ```bash
-torchrun --nnodes=1 --nproc_per_node=4 clincot/cli/train.py --config configs/exp/clincot_base.yaml --mode pref --output_dir runs/pref
+torchrun --nnodes=1 --nproc_per_node=2 clincot/cli/train.py --config configs/exp/clincot_base.yaml --mode pref --output_dir runs/pref
 ```
 
 Resume:
 ```bash
-torchrun --nnodes=1 --nproc_per_node=4 clincot/cli/train.py --config configs/exp/clincot_base.yaml --mode pref --output_dir runs/pref --resume
+torchrun --nnodes=1 --nproc_per_node=2 clincot/cli/train.py --config configs/exp/clincot_base.yaml --mode pref --output_dir runs/pref --resume
 ```
 
 ## 🏋️ Inference
